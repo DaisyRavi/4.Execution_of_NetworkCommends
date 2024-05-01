@@ -24,9 +24,50 @@ This commands includes
 • IP Commands
 <BR>
 • Other IP Commands e.g. show ip route etc.
-<BR>
 
+## program
+## ping command
+## client
+```
+import socket 
+from pythonping import ping 
+s=socket.socket() 
+s.bind(('localhost'8000)) 
+s.listen(5) 
+c,addr=s.accept() 
+while True: 
+    hostname=c.recv(1024).decode() 
+    try: 
+        c.send(str(ping(hostname, verbose=False)).encode()) 
+    except KeyError: 
+        c.send("Not Found".encode())
+        ```
+
+## server
+```py
+import socket 
+s=socket.socket() 
+s.connect(('localhost',8000)) 
+while True: 
+    ip=input("Enter the website you want to ping ") 
+    s.send(ip.encode()) 
+    print(s.recv(1024).decode())
+    ```
+## Tranceroute command
+```py
+from scapy.all import* 
+target = ["www.google.com"] 
+result, unans = traceroute(target,maxttl=32) 
+print(result,unans)
+```
 ## Output
+## ping command
+## client
+![Screenshot 2024-04-04 114430](https://github.com/Anusharonselva/4.Execution_of_NetworkCommends/assets/119405600/617c0106-5e49-4b10-b191-907298de2fad)
+## server
+![Screenshot 2024-04-04 114520](https://github.com/Anusharonselva/4.Execution_of_NetworkCommends/assets/119405600/9c63ec2f-db8e-4b30-a19d-b458fd116001)
+## tranceroute command
+![Screenshot 2024-04-04 114536](https://github.com/Anusharonselva/4.Execution_of_NetworkCommends/assets/119405600/5f694ad0-2091-4a26-a32e-f498e15ef45e)
 
 ## Result
 Thus Execution of Network commands Performed 
